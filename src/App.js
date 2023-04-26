@@ -39,6 +39,7 @@ function App() {
         });
         setThemeMode('light');
         showAlert('Light mode enabled', 'success');
+        document.title = "Light Mode";
       }else{
         setBtnText('Enable Light Mode');
         setMyStyle({
@@ -47,6 +48,7 @@ function App() {
       });
         setThemeMode('dark');
         showAlert('Dark mode enabled', 'success');
+        document.title = "Dark Mode";
       }
   }
 

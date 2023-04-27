@@ -6,6 +6,12 @@ import Navbar from './component/Navbar.js';
 import Textform from './component/Textform.js';
 import About from './component/Aboutus';
 import Alert from "./component/Alert";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
@@ -52,39 +58,16 @@ function App() {
       }
   }
 
-  const changeTheme =  () =>{
-
-    // setMyStyle({
-    //   color: 'white',
-    //   backgroundColor : color
-    // });
-    console.log('props');
+  const changeTheme =  (color) =>{
+    setMyStyle({
+      color: 'white',
+      backgroundColor : color
+    });
   }
-
-  // const changeGreen =  () =>{
-  //   setMyStyle({
-  //     color: 'white',
-  //     backgroundColor : 'green'
-  //   });
-  // }
-
-  // const changeYellow =  () =>{
-  //   setMyStyle({
-  //     color: 'white',
-  //     backgroundColor : 'yellow'
-  //   });
-  // }
-
-  // const changeRed =  () =>{
-  //   setMyStyle({
-  //     color: 'white',
-  //     backgroundColor : 'red'
-  //   });
-  // }
-
   
   const handleColor = (event) => {
-
+    
+    document.body.style.backgroundColor = '#1b7898';
     setMyStyle({
       color: 'white',
       backgroundColor : event.target.value
@@ -94,14 +77,18 @@ function App() {
 
   return (
     <>
+    <Router>
       <Navbar title="Textutils" mode={ThemeMode} myStyle={myStyle} toggleTheme={toggleTheme} btnText={btnText} handleColor={handleColor} changeTheme={changeTheme} />
       <Alert alert={alert}/>
-      <div className="container">
-          <Textform heading="Enter you text here"  showAlert={showAlert}/>
-      </div>
-      <div className="container">
-        <About myStyle={myStyle}/>
-      </div>
+
+      <Routes>
+          <Route exact path="/About"  element={<About myStyle={myStyle}/>} >
+          </Route>
+          <Route path="/" element={<Textform heading="Enter you text here"  showAlert={showAlert}/>} />
+      </Routes>
+
+
+      </Router>
     </>
   );
 }
